@@ -15,7 +15,14 @@ export const getPokemonDetail = async (identifier) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon/${identifier}`);
     if (!response.ok) throw new Error(`Failed to fetch Pokémon: ${identifier}`);
-    return await response.json();
+
+    const data = await response.json();
+    const pokemonId = data.id;
+
+    return {
+      ...data,
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`,
+    }
   } catch (error) {
     console.error(error);
     return null;
