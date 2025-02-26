@@ -25,15 +25,28 @@ export default {
     extend: {
       colors: {
         primary: {
-          500: "#635BFF",
-          400: "#A38CFF",
-          300: "#D3BDFF",
-          200: "#E7D6FF",
-          100: "#F7F0FF",
-          50: "#FBF7FF",
+          500: "#A2D2FF", 
+          400: "#BDE0FE",
+          300: "#CAF0F8",
+          200: "#E3F2FD",
+          100: "#F1FAFF",
+        },
+        secondary: {
+          500: "#FFD670", 
+          400: "#FFEE93",
+          300: "#FFF8D6",
+          200: "#FFFBEA",
+          100: "#FFFCF7",
+        },
+        accent: {
+          500: "#FFB5E8", 
+          400: "#FFC8DD",
+          300: "#FFD7E5",
+          200: "#FFE5F0",
+          100: "#FFF0F7",
         },
         neutral: {
-          500: "#00112D",
+          500: "#00112D", 
           400: "#2A3950",
           300: "#7B889D",
           200: "#A6AEBB",
@@ -42,9 +55,8 @@ export default {
         },
         additional: {
           white: "#FFFFFF",
-          navy: "#0F2060",
-          purple: "rgba(99, 91, 255, 0.1)",
-        }
+          bg: "#F9F9FB",
+        },
       },
       fontSize: {}
     },
