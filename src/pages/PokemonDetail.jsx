@@ -63,7 +63,7 @@ export default function PokemonDetail() {
           </div>
         </div>
       </div>
-      <button onClick={() => navigate(-1)} className="text-md rounded-md bg-orange-950 px-4 py-2 font-bold text-white">
+      <button onClick={() => navigate(-1)} className="text-md rounded-md bg-orange-950 px-4 py-2 font-bold text-white hover:bg-orange-800">
         Back
       </button>
     </div>
