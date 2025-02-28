@@ -1,28 +1,61 @@
-const BASE_URL = "https://pokeapi.co/api/v2";
+const BASE_URL = 'https://pokeapi.co/api/v2';
 
-export const getPokemonList = async (limit = 20, offset = 0) => {
+/**
+ * Fetch list of Pokémon with details
+ * @param {number}
+ * @param {number}
+ * @returns {Array}
+ */
+export const getPokemonList = async (limit = 12, offset = 0) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}&offset=${offset}`);
-    if (!response.ok) throw new Error("Failed to fetch Pokémon list");
-    return await response.json();
+    if (!response.ok) throw new Error('Failed to fetch Pokémon list');
+
+    const data = await response.json();
+
+    const pokemonDetails = await Promise.all(
+      data.results.map(async (pokemon) => {
+        const detailResponse = await fetch(pokemon.url);
+        const detailData = await detailResponse.json();
+
+        return {
+          id: detailData.id,
+          name: detailData.name,
+          height: detailData.height,
+          weight: detailData.weight,
+          image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${detailData.id}.svg`,
+        };
+      }),
+    );
+
+    return { results: pokemonDetails, count: data.count };
   } catch (error) {
     console.error(error);
-    return null;
+    return [];
   }
 };
 
+/**
+ * Fetch detailed Pokémon info
+ * @param {string | number} identifier
+ * @returns {Object}
+ */
 export const getPokemonDetail = async (identifier) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon/${identifier}`);
     if (!response.ok) throw new Error(`Failed to fetch Pokémon: ${identifier}`);
 
     const data = await response.json();
-    const pokemonId = data.id;
-
     return {
-      ...data,
-      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`,
-    }
+      id: data.id,
+      name: data.name,
+      height: data.height,
+      weight: data.weight,
+      types: data.types,
+      abilities: data.abilities,
+      stats: data.stats,
+      image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${data.id}.svg`,
+    };
   } catch (error) {
     console.error(error);
     return null;
