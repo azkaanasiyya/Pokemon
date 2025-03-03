@@ -1,14 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import usePokemonDetail from "../../hooks/usePokemonDetail";
-import Types from "../../components/Types";
-import Abilities from "../../components/Abilities";
-import Stats from "../../components/Stats";
+import { useNavigate } from 'react-router-dom';
+import usePokemonDetail from '../../hooks/usePokemonDetail';
+import Types from '../../components/Types';
+import Abilities from '../../components/Abilities';
+import Stats from '../../components/Stats';
+import { ClipLoader } from 'react-spinners';
 
 export default function PokemonDetail() {
   const { pokemon, loading } = usePokemonDetail();
   const navigate = useNavigate();
 
-  if (loading) return <p className="mt-6 text-center">Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex h-screen items-center justify-center bg-orange-50">
+        <ClipLoader color="#a16207" size={50} />
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-orange-50 text-center">
