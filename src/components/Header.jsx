@@ -11,8 +11,8 @@ export default function Header({ searchTerm, setSearchTerm }) {
           placeholder="Search Pokémon"
           className="rounded-full border-4 border-yellow-700 bg-orange-50 text-sm"
           value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
           }}
         />
       </div>
