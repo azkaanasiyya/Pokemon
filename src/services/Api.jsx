@@ -1,11 +1,5 @@
-const BASE_URL = 'https://pokeapi.co/api/v2';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-/**
- * Fetch list of Pokémon with details
- * @param {number}
- * @param {number}
- * @returns {Array}
- */
 export const getPokemonList = async (limit = 12, offset = 0) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}&offset=${offset}`);
@@ -35,11 +29,6 @@ export const getPokemonList = async (limit = 12, offset = 0) => {
   }
 };
 
-/**
- * Fetch detailed Pokémon info
- * @param {string | number} identifier
- * @returns {Object}
- */
 export const getPokemonDetail = async (identifier) => {
   try {
     const response = await fetch(`${BASE_URL}/pokemon/${identifier}`);
